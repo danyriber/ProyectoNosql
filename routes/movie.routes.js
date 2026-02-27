@@ -15,23 +15,24 @@ return res.status(500).json(err); //si no las encuentra salta error 500 (interna
 
 router.get('/id/:id', async (req, res) => {
 try {
-const movie = await Movie.findById(req.params.id);  //para buscarlas por id
+const movie = await Movie.findById(req.params.id);  //req.params.id: Es la forma que tiene Express de leer lo que escribiste
+// findByID es una función que viene dentro de Mongoose, necesita el ID y ella sola va a MongoDB a buscarlo
 if (movie) {
-return res.status(200).json(movie);
-} else {
-return res.status(404).json('Pelicula no encontrada');
+return res.status(200).json(movie); // Si la película existe, devuelve un código 200 (OK) y los datos de la película en formato JSON.
 }
+return res.status(404).json('Pelicula no encontrada'); // Si no hay película, responde con un código 404 (No encontrado) y un mensaje de error.
+
 } catch (err) {
-return res.status(500).json(err);
-}
-});
+return res.status(500).json(err); //catch atrapa el error , si se pone una palabra cualquiera evita q el servidor se apague
+}                                  // guarda el fallo en (err), 500 es error interno del servidor
+});                                //json(err) envia la info en formato json
 
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res) => { //post es para crear una peli nueva por ejemplo
 try {
-const newMovie = new Movie(req.body);
-const createdMovie = await newMovie.save(); //para crear la peli
-return res.status(201).json(createdMovie);
+const newMovie = new Movie(req.body); // creas una nueva peli con los datos que le des (body)
+const createdMovie = await newMovie.save(); //el servidor llama a mongodb y le ordena guardarlo con asincronia, espera a ejecutarse
+return res.status(201).json(createdMovie);// Responde con el código 201 (recurso creado) y devuelve la película recién guardada con su ID asignado.
 } catch (err) {
 return res.status(500).json(err);
 }
@@ -41,8 +42,8 @@ return res.status(500).json(err);
 router.put('/:id', async (req, res) => {
 try {
 const { id } = req.params;
-const movieUpdated = await Movie.findByIdAndUpdate(id, req.body, { new: true }); //para actualizar la peli
-return res.status(200).json(movieUpdated);
+const movieUpdated = await Movie.findByIdAndUpdate(id, req.body, { new: true }); 
+return res.status(200).json(movieUpdated); 
 } catch (err) {
 return res.status(500).json(err);
 }
