@@ -4,10 +4,10 @@ const router = express.Router();
 
 //aqui creamos las rutas para todas las peliculas con router y se organizan
 
-router.get('/', async (req, res) => {
-try {
-const movies = await Movie.find();
-return res.status(200).json(movies); //para ver todas las peliculas
+router.get('/', async (req, res) => { // si escribes en el navegador http://localhost:3000/movies/, se dispara esta función
+try {                                 //aqui estarian todas las peliculas
+const movies = await Movie.find(); //frena y espera a que Movie.find() me traiga todas las peliculas y cuando los tenga sigue", asincronia.
+return res.status(200).json(movies); // envia un código de éxito (200) y la lista de películas en formato JSON.
 } catch (err) {
 return res.status(500).json(err); //si no las encuentra salta error 500 (internal server error)
 }
