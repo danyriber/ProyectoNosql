@@ -1,0 +1,27 @@
+
+{
+"name": "proyectonosql",
+"version": "1.0.0",
+"main": "index.js",
+"scripts": {
+"start": "node index.js",
+"seed": "node seeds/movies.seed.js",
+"dev": "node --watch index.js"
+},
+"repository": {
+"type": "git",
+"url": "git+"
+},
+"keywords": [],
+"author": "",
+"license": "ISC",
+"bugs": {
+"url": ""
+},
+"homepage": "",
+"description": "",
+"dependencies": {
+"express": "^5.2.1",
+"mongoose": "^9.2.3"
+}
+}
