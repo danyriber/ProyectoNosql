@@ -1,5 +1,5 @@
-const express = require('express');
-const Movie = require('../models/Movie'); //se requiere express porque cada archivo de rutas necesita express
+const express = require('express'); //se requiere express porque cada archivo de rutas necesita express
+const Movie = require('../models/Movie'); //sin el modelo no sabria a q coleccion de mongo "atacar"
 const router = express.Router();
 
 //aqui creamos las rutas para todas las peliculas con router y se organizan
